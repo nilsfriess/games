@@ -1,0 +1,8 @@
+CC0:
+	http://opengameart.org/content/orthographic-outdoor-tiles
+		-Gras, Pfad, Pfadrand
+	http://opengameart.org/content/seamless-grass-texture-ii
+		-Gras Textur
+	http://opengameart.org/content/pixel-chest-and-coin
+		-Coins
+	

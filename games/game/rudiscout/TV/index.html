@@ -1,0 +1,43 @@
+<html>
+<body onload="Wechseln()">
+<script type="text/javascript">
+	  
+	    var bilder = new Array();
+        bilder[0] = '00_Rauschen.png' ;
+		bilder[1] = '01_Streifen.png' ;
+		bilder[2] = '02_RauschenRudi.png' ;
+		bilder[3] = '03_RudiZu.png' ;
+		bilder[4] = '04_RudiAuf.png' ;
+		bilder[5] = '05_RauschenRudiNah.png' ;
+		bilder[6] = '06_RudiNah.png' ;
+		bilder[7] = '07_RudiJumpOut.png' ;
+		bilder[8] = '08_RauschenJumpOut.png' ;
+		index = -1;
+		rauschen = -1;
+				
+        function Wechseln () {
+		    rauschen = rauschen + 1;
+			index=index+1;
+			
+			if(rauschen<20)
+			{	if(index > 1) 
+				{ index = 0;
+				}
+				document.getElementById("Bild").src = bilder[index];
+				window.setTimeout("Wechseln();",100) ;
+			}
+			else
+			{	if(index>8)
+					{index=0;
+					rauschen = 0;}
+				document.getElementById("Bild").src = bilder[index];
+				window.setTimeout("Wechseln();",200) ;
+			}
+        }
+     </script>
+  
+      <center>
+	    <img id="Bild" src="00_Rauschen.png">  
+      </center>
+ </body>
+ </html>

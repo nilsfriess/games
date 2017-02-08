@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <title>Datum-Countup mit JavaScript</title>
+
+    <script language="JavaScript">
+	//TAG DER ABGABE eingeben!!!!
+      var jahr=2016, monat=10, tag=23, stunde=20, minute=0, sekunde=0; // Start-Datum in MEZ
+	  
+	  var startDatum=new Date(jahr,monat-1,tag,stunde,minute,sekunde);
+	  zielDatum=new Date(); // Aktuelles Datum
+	  
+	  function auswahl() {
+		if(startDatum<zielDatum)  
+		{
+		var par = document.getElementById('TEXT');
+		par.innerHTML = par.innerHTML +"<font face=\"Arial\">Seit der Ver&ouml;ffentlichung am 23.10.2016 um 20:00 Uhr des Spieles <br>Rudi Scout Online sind vergangen: </font>";
+		countup()
+		}
+		else
+		{
+		var par = document.getElementById('TEXT');
+		par.innerHTML = par.innerHTML +"<font face=\"Arial\">Bis zur Ver&ouml;ffentlichung am 23.10.2016 um 20 Uhr des Spieles <br>Rudi Scout Online sind es noch: </font>";
+		countdown()
+		}
+	  }
+	  
+	  //Count-UP Funktion --> bis zur Veröffentlichung des Spieles sind es noch:
+      function countup() {
+		var startDatum=new Date(jahr,monat-1,tag,stunde,minute,sekunde);
+		zielDatum=new Date(); // Aktuelles Datum
+	  
+        // Countup erst berechnen und anzeigen, wenn Start-Datum überschritten wird
+          var jahre=0, monate=0, tage=0, stunden=0, minuten=0, sekunden=0;
+
+          // Jahre
+          while(startDatum<zielDatum) {
+            jahre++;
+            startDatum.setFullYear(startDatum.getFullYear()+1);
+          }
+          startDatum.setFullYear(startDatum.getFullYear()-1);
+          jahre--;
+
+          // Monate
+          while(startDatum<zielDatum) {
+            monate++;
+            startDatum.setMonth(startDatum.getMonth()+1);
+          }
+          startDatum.setMonth(startDatum.getMonth()-1);
+          monate--;
+
+          // Tage
+          while(startDatum.getTime()+(24*60*60*1000)<zielDatum) {
+            tage++;
+            startDatum.setTime(startDatum.getTime()+(24*60*60*1000));
+          }
+
+          // Stunden
+          stunden=Math.floor((zielDatum-startDatum)/(60*60*1000));
+          startDatum.setTime(startDatum.getTime()+stunden*60*60*1000);
+
+          // Minuten
+          minuten=Math.floor((zielDatum-startDatum)/(60*1000));
+          startDatum.setTime(startDatum.getTime()+minuten*60*1000);
+
+          // Sekunden
+          sekunden=Math.floor((zielDatum-startDatum)/1000);
+
+          // Anzeige formatieren
+		  (jahre!=1)?jahre=jahre+" Jahre,  ":jahre=jahre+" Jahr,  ";
+          (monate!=1)?monate=monate+" Monate,  ":monate=monate+" Monat,  ";
+          (tage!=1)?tage=tage+" Tage,  ":tage=tage+" Tag,  ";
+          (stunden!=1)?stunden=stunden+" Stunden,  ":stunden=stunden+" Stunde,  ";
+          (minuten!=1)?minuten=minuten+" Minuten  und  ":minuten=minuten+" Minute  und  ";
+          if(sekunden<10) sekunden="0"+sekunden;
+          (sekunden!=1)?sekunden=sekunden+" Sekunden":sekunden=sekunden+" Sekunde";
+		  ;
+
+          document.countform.countinput.value=
+              jahre+monate+tage+stunden+minuten+sekunden;
+			  
+		  setTimeout('countup()',200);	  
+      }
+	  
+	//FUNKTION COUNTDOWN  
+	   function countdown() {
+	   	var startDatum=new Date(jahr,monat-1,tag,stunde,minute,sekunde);
+		zielDatum=new Date(); // Aktuelles Datum
+	   
+	   
+        // Countdown berechnen und anzeigen, bis Start-Datum des Eventes erreicht ist
+          var jahre=0, monate=0, tage=0, stunden=0, minuten=0, sekunden=0;
+
+          // Jahre
+          while(zielDatum<startDatum) {
+            jahre++;
+            zielDatum.setFullYear(zielDatum.getFullYear()+1);
+          }
+          zielDatum.setFullYear(zielDatum.getFullYear()-1);
+          jahre--;
+
+          // Monate
+          while(zielDatum<startDatum) {
+            monate++;
+            zielDatum.setMonth(zielDatum.getMonth()+1);
+          }
+          zielDatum.setMonth(zielDatum.getMonth()-1);
+          monate--;
+
+          // Tage
+          while(zielDatum.getTime()+(24*60*60*1000)<startDatum) {
+            tage++;
+            zielDatum.setTime(zielDatum.getTime()+(24*60*60*1000));
+          }
+
+          // Stunden
+          stunden=Math.floor((startDatum-zielDatum)/(60*60*1000));
+          zielDatum.setTime(zielDatum.getTime()+stunden*60*60*1000);
+
+          // Minuten
+          minuten=Math.floor((startDatum-zielDatum)/(60*1000));
+          zielDatum.setTime(zielDatum.getTime()+minuten*60*1000);
+
+          // Sekunden
+          sekunden=Math.floor((startDatum-zielDatum)/1000);
+
+          // Anzeige formatieren
+          (jahre!=1)?jahre=jahre+" Jahre,  ":jahre=jahre+" Jahr,  ";
+          (monate!=1)?monate=monate+" Monate,  ":monate=monate+" Monat,  ";
+          (tage!=1)?tage=tage+" Tage,  ":tage=tage+" Tag,  ";
+          (stunden!=1)?stunden=stunden+" Stunden,  ":stunden=stunden+" Stunde,  ";
+          (minuten!=1)?minuten=minuten+" Minuten  und  ":minuten=minuten+" Minute  und  ";
+          if(sekunden<10) sekunden="0"+sekunden;
+          (sekunden!=1)?sekunden=sekunden+" Sekunden":sekunden=sekunden+" Sekunde";
+
+          document.countform.countinput.value=
+              jahre+monate+tage+stunden+minuten+sekunden;
+
+          setTimeout('countdown()',200);
+        }
+    </script>
+  </head>
+
+  <body onload="auswahl()">
+	<p id="TEXT"></p>
+    <form name="countform">
+      <p><h3>
+        <input size="75" name="countinput">
+      </h3></p>
+    </form>
+  </body>
+
+</html>
